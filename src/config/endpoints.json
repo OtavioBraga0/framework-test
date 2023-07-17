@@ -1,0 +1,11 @@
+{
+  "user": {
+    "get": "/users"
+  },
+  "product": {
+    "getAll": "/products"
+  },
+  "cart": {
+    "post": "/sales"
+  }
+}
