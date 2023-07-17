@@ -3,6 +3,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { EngageState } from "../DomainLayer";
 import { IUser } from "../entities/User";
 import { signIn } from "../../data/services/auth";
+import { toast } from "react-toastify";
 
 export interface ThunkApi {
   dispatch: Dispatch;
@@ -20,8 +21,15 @@ export const authThunk = createAsyncThunk<
   ThunkApi
 >(AuthActions.AUTH, async (payload, thunkAPI) => {
   try {
-    return (await signIn(payload.email, payload.password))[0];
+    const user = await signIn(payload.email, payload.password);
+    console.log(user);
+
+    if (user.length <= 0) {
+      throw new Error("User not found");
+    }
+    return user[0];
   } catch (error: any) {
+    toast(`User not found`, { type: `error` });
     return thunkAPI.rejectWithValue(error.message);
   }
 });

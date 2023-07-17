@@ -5,6 +5,10 @@ import { Router } from "./Router";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle, theme } from "./styles/theme";
 
+import { ToastContainer } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
+
 export type MainProps = {
   store: EngageStore;
 };
@@ -16,6 +20,7 @@ export const Main: React.FC<MainProps> = (props: MainProps) => {
       <Provider store={store}>
         <GlobalStyle />
         <Router />
+        <ToastContainer />
       </Provider>
     </ThemeProvider>
   );
